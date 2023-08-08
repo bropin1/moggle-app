@@ -1,0 +1,14 @@
+@import "../../styles/globalStyles.module.scss";
+.root {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  height: #{$sticker-size}px;
+  width: #{$sticker-size}px;
+
+  cursor: pointer;
+  user-select: none;
+  img {
+    width: 100%;
+  }
+}

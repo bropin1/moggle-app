@@ -1,38 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
 .App {
-  text-align: center;
+  background-color: black;
+  height: 100vh;
+  color: green;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.instruction {
+  display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#title {
+  font-size: 1.5em;
+  color: green;
+  font-weight: 900;
+}
+
+@media screen and (min-width: 768px) {
+  .desktop-instruction {
+    display: block;
+    font-size: 1px !important;
+  }
+  #title {
+    font-size: 5em;
+    color: green;
+    font-weight: 900;
+  }
+  .instruction {
+    font-size: 1em;
+    display: inline;
+    color: green;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.button {
+  color: green;
+  background-color: #000000;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* Mobile Styles */
+@media only screen and (max-width: 768px) {
+  .App {
+    /* Modify as needed for mobile */
+    color: green;
   }
 }

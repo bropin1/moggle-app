@@ -1,0 +1,35 @@
+@import "../../styles/globalStyles.module.scss";
+.root {
+  position: relative;
+
+  .img-wrapper {
+    position: relative;
+    height: #{$sticker-size}px;
+    width: #{$sticker-size}px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    img {
+      width: 100%;
+      z-index: 1;
+    }
+  }
+
+  .grid-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(1);
+    transform-origin: top left;
+    // display: none;
+    display: grid;
+    gap: 8px;
+    z-index: 2;
+    border-radius: 8px;
+    padding: 16px;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px 2px rgba(146, 252, 173, 0.2);
+    transition: transform 0.1s ease-in-out;
+  }
+}
