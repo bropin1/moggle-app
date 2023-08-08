@@ -24,7 +24,7 @@ const GridContainer = ({ iconImg, headerRef, children }) => {
   useEffect(() => {
     gridDisplayed
       ? (headerRef.current.style.zIndex = 2)
-      : (headerRef.current.style.zIndex = 0);
+      : (headerRef.current.style.zIndex = 1);
   }, [gridDisplayed, headerRef]);
 
   const handleOnTouchStart = (e) => {
