@@ -181,10 +181,12 @@ const Canvas = forwardRef(
         </div>
 
         <div className={styles["img-canvas-wrapper"]} ref={imgCanvasWrapperRef}>
-          <span className={styles.instruction}>
-            Hold CTRL or CMD on a sticker and drag to
-            <span> scale &#8592; &#8594; and rotate &#8593; &#8595;</span>
-          </span>
+          {!uploadedImage && (
+            <span className={styles.instruction}>
+              Hold CTRL or CMD on a sticker and drag to
+              <span> scale &#8592; &#8594; and rotate &#8593; &#8595;</span>
+            </span>
+          )}
           <canvas ref={imgCanvasRef} />
         </div>
 
