@@ -18,7 +18,7 @@ body {
   row-gap: 16px;
   justify-content: center;
   @media (max-width: 768px) {
-    padding: 16px 8px;
+    padding: 0 8px 8px 8px;
   }
 }
 
@@ -35,13 +35,24 @@ header {
     font-family: inherit;
     color: #b3ffab;
     text-shadow: 0 0 5px #66ff66;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 
 .container {
   display: flex;
   column-gap: 16px;
+  position: absolute;
+  bottom: 48px;
+  right: 40px;
+  z-index: 2;
 
+  @media (max-width: 768px) {
+    bottom: 16px;
+    right: 16px;
+  }
   .upload-wrapper,
   .save-button {
     position: relative;
@@ -52,15 +63,19 @@ header {
     border: none;
     border-radius: 5px;
     font-weight: bold;
-    background: linear-gradient(90deg, #00ff00 0%, #ff4900 100%);
+    // background: linear-gradient(90deg, #00ff00 0%, #ff4900 100%);
+    background-color: transparent;
+    border: 1px solid black;
     // text-shadow: 0 0 5px #000; // Shadow for better readability
-    color: #000; // Black color for better contrast
-
+    color: black; // Black color for better contrast
+    backdrop-filter: blur(2px);
+    // background-color: rgba(255, 255, 255, 0.15);
     @media (max-width: 768px) {
       font-size: 12px;
     }
     &:hover {
-      box-shadow: 0 0 20px #ff00d6;
+      background-color: black;
+      color: white;
     }
   }
   .save-button {
@@ -76,7 +91,10 @@ header {
     border: none;
     border-radius: 5px;
     font-weight: bold;
-    color: #000;
+    color: black;
+    &:hover {
+      color: white;
+    }
     @media (max-width: 768px) {
       font-size: 12px;
     }

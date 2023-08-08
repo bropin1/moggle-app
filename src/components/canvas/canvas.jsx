@@ -120,7 +120,6 @@ const Canvas = forwardRef(
         onTouchEnd={handleInteractionEnd}
         onTouchMove={handleInteractionMove}
       >
-        {/* {uploadedImage} */}
         <div className={styles.header} ref={headerRef}>
           <div className={styles["sticker-generator-wrapper"]}>
             <GridContainer iconImg={mgl1} headerRef={headerRef}>

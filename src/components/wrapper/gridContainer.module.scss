@@ -62,12 +62,15 @@ $sticker-size: 50;
 
   .img-wrapper {
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
     display: flex;
     align-items: center;
     z-index: 1;
-
+    @media (max-width: 768px) {
+      height: 40px;
+      width: 40px;
+    }
     img {
       width: 100%;
       z-index: 1;
@@ -90,6 +93,11 @@ $sticker-size: 50;
     height: 24px;
     border-radius: 100px;
     background-color: #000; // Improved readability
+    @media (max-width: 768px) {
+      font-size: 8px;
+      width: 16px;
+      height: 16px;
+    }
   }
 
   .grid-container {
@@ -118,21 +126,5 @@ $sticker-size: 50;
   // Add focus states for interactive elements if needed
   .interactive-element:focus {
     outline: 2px solid #000; // Example focus outline
-  }
-}
-
-@media (max-width: 768px) {
-  .root {
-    position: relative;
-
-    .img-wrapper {
-      height: 40px;
-      width: 40px;
-    }
-    .number-of-el {
-      font-size: 8px;
-      width: 16px;
-      height: 16px;
-    }
   }
 }
