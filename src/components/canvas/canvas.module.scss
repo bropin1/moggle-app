@@ -28,9 +28,9 @@
       background-color: #a2b3ff; /* Neon blue background color */
       border-radius: 4px;
       color: #fff; /* White text for better contrast */
-      box-shadow: 0 0 10px #00f, /* Inner blue glow */ 0 0 20px #00f,
-        /* Middle blue glow */ 0 0 40px #00f,
-        /* Outer blue glow */ 0 0 100px #00f; /* Far outer blue glow */
+      box-shadow: 0 0 5px #00f, /* Inner blue glow */ 0 0 10px #00f,
+        /* Middle blue glow */ 0 0 20px #00f,
+        /* Outer blue glow */ 0 0 50px #00f; /* Far outer blue glow */
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -44,8 +44,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: black;
-    box-shadow: 0 0 0px 2px limegreen; /* X-offset, Y-offset, blur radius, spread radius, color */
+    background-color: rgb(128, 255, 128);
+    box-shadow: 0 0 30px 2px limegreen; /* X-offset, Y-offset, blur radius, spread radius, color */
     width: 100%;
     border-radius: 8px;
     z-index: 0;

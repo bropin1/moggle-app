@@ -54,14 +54,23 @@ const Canvas = forwardRef(
 
       let width, height;
 
-      console.log();
+      //add logic to handle canvas max height // image spills out of canvas if width is too big
       if (aspectRatio < 1) {
         height = canvasRef.current.offsetHeight - headerHeight;
         width = height * aspectRatio;
+        if (canvasRef.current.offsetwidth < width) {
+          width = canvasRef.current.offsetWidth;
+          height = width / aspectRatio;
+        }
       } else {
         width = canvasRef.current.offsetWidth;
         height = width / aspectRatio;
+        if (canvasRef.current.offsetHeight - headerHeight < height) {
+          height = canvasRef.current.offsetHeight - headerHeight;
+          width = height * aspectRatio;
+        }
       }
+
       if (saveImage) {
         console.log("SAVE IMAGE");
         console.log(
