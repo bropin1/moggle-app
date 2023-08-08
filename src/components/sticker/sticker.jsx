@@ -9,6 +9,7 @@ const Sticker = forwardRef(
       scale,
       rotation,
       handleActiveSticker,
+
       index,
       activeIndex,
       inTrash,

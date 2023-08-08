@@ -128,10 +128,6 @@ export default function useStickers() {
       };
     });
 
-    // setStickerRealTime((prevStickersRealTime) => {
-    //   const newStickersRealTime = [...prevStickersRealTime, { ...newSticker }];
-    //   return newStickersRealTime;
-    // });
     setStickers((prevStickers) => {
       const newStickers = [...prevStickers, { ...newSticker }];
       return newStickers;

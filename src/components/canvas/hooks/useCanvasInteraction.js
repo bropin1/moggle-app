@@ -32,7 +32,7 @@ export default function useCanvasInteractions(canvasRef) {
     console.log("useCanvasInteractions RERENDER");
   }, []);
 
-  const handleGenerateSticker = (event, img, rootRef) => {
+  const handleGenerateSticker = (event, img, elRef) => {
     console.log("handleGenerateSticker()");
 
     // setMouseOrigin
@@ -44,9 +44,11 @@ export default function useCanvasInteractions(canvasRef) {
     mouseOriginRef.current = { x: clientX, y: clientY };
     mousePositionRef.current = { x: clientX, y: clientY };
 
+    const elRefRect = elRef.current.getBoundingClientRect();
+    const canvasRect = canvasRef.current.getBoundingClientRect();
     const initialPosition = {
-      x: rootRef.current.offsetLeft,
-      y: rootRef.current.offsetTop,
+      x: elRefRect.x - canvasRect.x,
+      y: elRefRect.y - canvasRect.y,
     };
     generateSticker(img, initialPosition);
   };
@@ -66,6 +68,7 @@ export default function useCanvasInteractions(canvasRef) {
       const clientY =
         event.type === "touchmove" ? event.touches[0].clientY : event.clientY;
 
+      // this is for the style of the intersecting stickers
       setInTrash(
         isIntersecting(
           trashRef.current,
@@ -195,6 +198,7 @@ export default function useCanvasInteractions(canvasRef) {
           x: stickersRefs.current[newIndex].offsetLeft,
           y: stickersRefs.current[newIndex].offsetTop,
         });
+
         setInitialRotation(stickers[newIndex].rotation);
         setInitialScale(stickers[newIndex].scale);
       }
@@ -217,25 +221,24 @@ export default function useCanvasInteractions(canvasRef) {
     if (stickersLengthRef.current !== stickers.length) {
       let syntheticEvent;
 
-      if ("ontouchstart" in window && false) {
-        // For touch devices
-        console.log("line 250- useCanvasInteraction");
-        syntheticEvent = new TouchEvent("touchstart", {
-          touches: [
-            {
-              clientX: mousePositionRef.current.x,
-              clientY: mousePositionRef.current.y,
-            },
-          ],
-        });
-      } else {
-        // For non-touch devices
-        syntheticEvent = new MouseEvent("mousedown", {
-          clientX: mousePositionRef.current.x,
-          clientY: mousePositionRef.current.y,
-        });
-      }
-
+      // if ("ontouchstart" in window && false) {
+      //   // For touch devices
+      //   console.log("line 250- useCanvasInteraction");
+      //   syntheticEvent = new TouchEvent("touchstart", {
+      //     touches: [
+      //       {
+      //         clientX: mousePositionRef.current.x,
+      //         clientY: mousePositionRef.current.y,
+      //       },
+      //     ],
+      //   });
+      // } else {
+      // For non-touch devices
+      syntheticEvent = new MouseEvent("mousedown", {
+        clientX: mousePositionRef.current.x,
+        clientY: mousePositionRef.current.y,
+      });
+      // }
       handleInteractionStart(syntheticEvent);
       stickersLengthRef.current += 1;
     }
@@ -249,17 +252,13 @@ export default function useCanvasInteractions(canvasRef) {
 
     isMouseDownRef.current = false;
 
-    // if (
-    //   isIntersecting(
-    //     trashRef.current,
-    //     stickersRefs.current[activeIndex.current]
-    //   )
-    // ) {
-    //   deleteActiveSticker();
-    //   stickersLengthRef.current -= 1;
-    // }
-
-    if (inTrash) {
+    if (
+      isIntersecting(
+        trashRef.current,
+        stickersRefs.current[activeIndex.current]
+      )
+    ) {
+      setInTrash(false);
       deleteActiveSticker();
       stickersLengthRef.current -= 1;
     }
