@@ -178,6 +178,7 @@ export default function useCanvasInteractions(canvasRef) {
       mouseOriginRef.current = { x: clientX, y: clientY };
 
       if (event.touches && event.touches.length === 2) {
+        if (!stickers[newIndex]) return;
         const dx = event.touches[0].clientX - event.touches[1].clientX;
         const dy = event.touches[0].clientY - event.touches[1].clientY;
         const distance = Math.sqrt(dx * dx + dy * dy);
