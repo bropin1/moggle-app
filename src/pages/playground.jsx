@@ -17,19 +17,25 @@ export default function Playground() {
 
   return (
     <div className={styles.root}>
-      <div className="Upload">
-        <div className="button">
+      <header>
+        <h1>Let's get $Mogged</h1>
+      </header>
+      <div className={styles.container}>
+        <div className={styles["upload-wrapper"]}>
           <input
             type="file"
             id="imageUpload"
             accept="image/*"
+            className={styles["image-upload-input"]}
             onChange={handleImageUpload}
             style={{ display: "none" }}
           />
           <label htmlFor="imageUpload">Upload Image</label>
         </div>
+        <button className={styles["save-button"]} onClick={handleSaveImage}>
+          Save
+        </button>
       </div>
-      <button onClick={handleSaveImage}>Save</button>
       <Canvas
         uploadedImage={uploadedImage}
         imgCanvasRef={imgCanvasRef}

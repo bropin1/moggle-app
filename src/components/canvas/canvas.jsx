@@ -120,6 +120,14 @@ const Canvas = forwardRef(
                 handleGenerateSticker={handleGenerateSticker}
               />
               <StickerGenerator
+                img={mgl2}
+                handleGenerateSticker={handleGenerateSticker}
+              />
+              <StickerGenerator
+                img={mgl3}
+                handleGenerateSticker={handleGenerateSticker}
+              />
+              <StickerGenerator
                 img={mgl4}
                 handleGenerateSticker={handleGenerateSticker}
               />
@@ -143,6 +151,8 @@ const Canvas = forwardRef(
                 img={mgl9}
                 handleGenerateSticker={handleGenerateSticker}
               />
+            </GridContainer>
+            <GridContainer iconImg={mgl10} headerRef={headerRef}>
               <StickerGenerator
                 img={mgl10}
                 handleGenerateSticker={handleGenerateSticker}
@@ -152,16 +162,10 @@ const Canvas = forwardRef(
                 handleGenerateSticker={handleGenerateSticker}
               />
             </GridContainer>
-            <GridContainer iconImg={mgl3} headerRef={headerRef}>
-              <StickerGenerator
-                img={mgl2}
-                handleGenerateSticker={handleGenerateSticker}
-              />
-              <StickerGenerator
-                img={mgl3}
-                handleGenerateSticker={handleGenerateSticker}
-              />
-            </GridContainer>
+            <StickerGenerator
+              img={pipe1}
+              handleGenerateSticker={handleGenerateSticker}
+            />
           </div>
 
           <Trash ref={trashRef} inTrash={inTrash} />
