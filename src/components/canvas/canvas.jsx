@@ -179,8 +179,12 @@ const Canvas = forwardRef(
 
           <Trash ref={trashRef} inTrash={inTrash} />
         </div>
+
         <div className={styles["img-canvas-wrapper"]} ref={imgCanvasWrapperRef}>
-          <canvas ref={imgCanvasRef}> </canvas>
+          <span className={styles.instruction}>
+            On computer hold CTRL or CMD to scale and rotate
+          </span>
+          <canvas ref={imgCanvasRef} />
         </div>
 
         {stickers.map((sticker, index) => {

@@ -4,12 +4,11 @@
 
   .img-wrapper {
     position: relative;
-    height: #{$sticker-size}px;
-    width: #{$sticker-size}px;
+    height: #{$sticker-size - 8}px;
+    width: #{$sticker-size - 8}px;
     display: flex;
     align-items: center;
     z-index: 1;
-    padding: 4px;
 
     img {
       width: 100%;

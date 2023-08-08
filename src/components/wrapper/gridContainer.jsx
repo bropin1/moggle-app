@@ -70,7 +70,36 @@ const GridContainer = ({ iconImg, headerRef, children }) => {
       onMouseLeave={handleEnd}
     >
       <div className={styles["img-wrapper"]}>
-        <img src={iconImg} alt="" draggable={false} />
+        <img
+          src={iconImg}
+          alt=""
+          draggable={false}
+          style={{
+            position: "absolute",
+            transform: "rotate(7deg)",
+            transformOrigin: "left center",
+          }}
+        />
+        <img
+          src={iconImg}
+          alt=""
+          draggable={false}
+          style={{
+            position: "absolute",
+            transform: "rotate(-7deg)",
+            transformOrigin: "left center",
+          }}
+        />
+        <img
+          src={iconImg}
+          alt=""
+          draggable={false}
+          style={{
+            position: "absolute",
+            transform: "rotate(-20deg)",
+            transformOrigin: "left center",
+          }}
+        />
       </div>
 
       <div
