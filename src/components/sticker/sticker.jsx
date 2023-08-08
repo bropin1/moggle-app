@@ -37,6 +37,8 @@ const Sticker = forwardRef(
         inTrash && activeIndex.current === index ? "red" : "";
       focusHelperRef.current.style.border =
         inTrash && activeIndex.current === index ? "2px solid red" : "";
+      focusHelperRef.current.style.boxShadow =
+        inTrash && activeIndex.current === index ? "none" : "";
     }, [activeIndex, index, position, rotation, scale, ref, inTrash]);
 
     return (
