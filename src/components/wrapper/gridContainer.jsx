@@ -101,7 +101,7 @@ const GridContainer = ({ iconImg, headerRef, children }) => {
           }}
         />
       </div>
-
+      <div className={styles["number-of-el"]}>{numberOfChildren}</div>
       <div
         className={styles["grid-container"]}
         style={gridStyle}

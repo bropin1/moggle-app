@@ -1,11 +1,69 @@
+// @import "../../styles/globalStyles.module.scss";
+// .root {
+//   position: relative;
+
+//   .img-wrapper {
+//     position: relative;
+//     height: #{$sticker-size - 8}px;
+//     width: #{$sticker-size - 8}px;
+//     display: flex;
+//     align-items: center;
+//     z-index: 1;
+
+//     img {
+//       width: 100%;
+//       z-index: 1;
+//     }
+//   }
+
+//   .number-of-el {
+//     position: absolute;
+//     top: -2px;
+//     right: -2px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     z-index: 1;
+//     color: rgb(255, 255, 255);
+//     font-size: 12px;
+//     font-weight: 600;
+//     width: 24px;
+//     height: 24px;
+//     border-radius: 100px;
+//     background-color: rgb(0, 0, 0);
+//   }
+
+//   .grid-container {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     transform: scale(1);
+//     transform-origin: top left;
+//     display: none;
+//     // display: grid;
+//     gap: 8px;
+//     z-index: 2;
+//     border-radius: 8px;
+//     padding: 16px;
+//     backdrop-filter: blur(5px);
+//     background-color: rgba(0, 0, 0, 0.5);
+//     box-shadow: 0 0 10px 2px rgba(146, 252, 173, 0.2);
+//     transition: transform 0.1s ease-in-out;
+//   }
+// }
+
 @import "../../styles/globalStyles.module.scss";
+
+// Define the sticker size variable if it's not defined in the global styles
+$sticker-size: 50;
+
 .root {
   position: relative;
 
   .img-wrapper {
     position: relative;
-    height: #{$sticker-size - 8}px;
-    width: #{$sticker-size - 8}px;
+    height: 70px;
+    width: 70px;
     display: flex;
     align-items: center;
     z-index: 1;
@@ -13,7 +71,25 @@
     img {
       width: 100%;
       z-index: 1;
+      // alt attribute should be defined in the HTML, not here
     }
+  }
+
+  .number-of-el {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: #fff; // Improved readability
+    font-size: 12px;
+    font-weight: 600;
+    width: 24px;
+    height: 24px;
+    border-radius: 100px;
+    background-color: #000; // Improved readability
   }
 
   .grid-container {
@@ -22,8 +98,7 @@
     left: 0;
     transform: scale(1);
     transform-origin: top left;
-    display: none;
-    // display: grid;
+    display: none; // Adjust as needed
     gap: 8px;
     z-index: 2;
     border-radius: 8px;
@@ -32,5 +107,32 @@
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 10px 2px rgba(146, 252, 173, 0.2);
     transition: transform 0.1s ease-in-out;
+
+    @media (max-width: 768px) {
+      // Example breakpoint for mobile devices
+      padding: 8px; // Reduce padding for smaller screens
+      // Add other adjustments as needed for the mobile layout
+    }
+  }
+
+  // Add focus states for interactive elements if needed
+  .interactive-element:focus {
+    outline: 2px solid #000; // Example focus outline
+  }
+}
+
+@media (max-width: 768px) {
+  .root {
+    position: relative;
+
+    .img-wrapper {
+      height: 40px;
+      width: 40px;
+    }
+    .number-of-el {
+      font-size: 8px;
+      width: 16px;
+      height: 16px;
+    }
   }
 }

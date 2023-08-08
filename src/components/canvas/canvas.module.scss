@@ -20,15 +20,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     padding: 8px 0;
     z-index: 1;
     padding-bottom: 20px;
 
     .sticker-generator-wrapper {
-      background-color: #a2b3ff; /* Neon blue background color */
       border-radius: 4px;
       color: #fff; /* White text for better contrast */
+      background-color: #a2b3ff; /* Neon blue background color */
       box-shadow: 0 0 5px #00f, /* Inner blue glow */ 0 0 10px #00f,
         /* Middle blue glow */ 0 0 20px #00f,
         /* Outer blue glow */ 0 0 50px #00f; /* Far outer blue glow */
@@ -63,6 +64,13 @@
       font-weight: 700;
       z-index: 0;
       text-align: center;
+      @media (max-width: 768px) {
+        display: none;
+      }
+      span {
+        font-size: inherit;
+        white-space: nowrap;
+      }
     }
 
     canvas {

@@ -32,6 +32,11 @@ const Sticker = forwardRef(
 
       localRef.current.style.opacity =
         inTrash && activeIndex.current === index ? "0.5" : "1";
+
+      focusHelperRef.current.style.backgroundColor =
+        inTrash && activeIndex.current === index ? "red" : "";
+      focusHelperRef.current.style.border =
+        inTrash && activeIndex.current === index ? "2px solid red" : "";
     }, [activeIndex, index, position, rotation, scale, ref, inTrash]);
 
     return (

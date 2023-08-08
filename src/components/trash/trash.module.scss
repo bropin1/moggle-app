@@ -1,10 +1,21 @@
 @import "../../styles/globalStyles.module.scss";
 
 .root {
-  width: #{$sticker-size}px;
-  height: #{$sticker-size}px;
+  width: 60px;
+  height: 60px;
   padding: 10px;
+  background-color: #ffa2a2; /* Neon blue background color */
+  box-shadow: 0 0 5px rgb(255, 0, 0),
+    /* Inner blue glow */ 0 0 10px rgb(255, 0, 0),
+    /* Middle blue glow */ 0 0 20px rgb(255, 0, 0),
+    /* Outer blue glow */ 0 0 50px rgb(255, 0, 0); /* Far outer blue glow */
+  border-radius: 8px;
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
   img {
     width: 100%;
+    filter: invert(1) brightness(2);
   }
 }
