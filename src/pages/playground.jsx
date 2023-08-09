@@ -69,7 +69,7 @@ export default function Playground() {
               style={{ display: "none" }}
             />
             <label htmlFor="imageUpload" className={styles.label}>
-              <img src={arrowUp} alt="" />
+              <img src={arrowUp} alt="" draggable={false} />
             </label>
           </div>
           <button className={styles["save-button"]} onClick={handleSaveImage}>
