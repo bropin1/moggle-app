@@ -18,11 +18,9 @@ export default function StickerGenerator({ img, handleGenerateSticker }) {
       className={styles.root}
       ref={rootRef}
       onMouseDown={(event) => {
-        console.log("MOUSE DOWN StickerGenerator");
         handleGenerateSticker(event, img, rootRef);
       }}
       onTouchStart={(event) => {
-        console.log("TOUCH START StickerGenerator");
         handleGenerateSticker(event, img, rootRef);
       }}
     >

@@ -8,11 +8,8 @@ export default async function saveCompositeImage(
   stickerSize
 ) {
   if (stickers.length === 0) return;
-  console.log("origin stickers", stickers);
-  console.log("imgOrigin", imgOrigin);
   const ratio = bgImg.width / bgDisplayedWidth;
   const imageCache = {};
-  console.log("ratio", ratio);
   // ---------------------
 
   const loadWatermark = () => {
@@ -58,13 +55,8 @@ export default async function saveCompositeImage(
   const newStickers = await Promise.all(stickers.map(loadStickerImage));
   const stickerAspectRatio =
     newStickers[0].img.height / newStickers[0].img.width;
-  console.log("stickerAspectRatio", stickerAspectRatio);
-
   const stickerBaseWidth = stickerSize * ratio;
   const stickerBaseHeight = stickerBaseWidth * stickerAspectRatio;
-  console.log("stickerBaseWidth", stickerBaseWidth);
-  console.log("stickerBaseHeight", stickerBaseHeight);
-  console.log("newStickers :", newStickers);
   // sticker base size
 
   // Create a canvas for compositing
@@ -95,11 +87,28 @@ export default async function saveCompositeImage(
   });
 
   // ---------------------
-  const padding = canvas.width / 60; // Padding of 1/40 of the canvas's width
-  const watermarkWidth = canvas.width / 2; // Adjust this to your desired watermark size
-  const watermarkHeight = (watermark.height / watermark.width) * watermarkWidth;
-  const watermarkPosX = canvas.width - watermarkWidth;
-  const watermarkPosY = canvas.height - watermarkHeight;
+  // const padding = canvas.width / 60; // Padding of 1/40 of the canvas's width
+  // const watermarkWidth = canvas.width / 2; // Adjust this to your desired watermark size
+  // const watermarkHeight = (watermark.height / watermark.width) * watermarkWidth;
+  // const watermarkPosX = canvas.width - watermarkWidth;
+  // const watermarkPosY = canvas.height - watermarkHeight;
+  const aspectRatio = watermark.height / watermark.width;
+  let watermarkWidth;
+  let watermarkHeight;
+
+  if (canvas.height < canvas.width) {
+    watermarkHeight = canvas.height / 16;
+    watermarkWidth = watermarkHeight / aspectRatio;
+  } else {
+    watermarkWidth = canvas.width / 4;
+    watermarkHeight = watermarkWidth * aspectRatio;
+  }
+
+  const padding = canvas.width / 40;
+
+  const watermarkPosX = canvas.width - watermarkWidth - padding;
+  const watermarkPosY = canvas.height - watermarkHeight - padding;
+
   ctx.drawImage(
     watermark,
     watermarkPosX,

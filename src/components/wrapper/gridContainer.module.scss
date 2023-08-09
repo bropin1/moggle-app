@@ -59,20 +59,25 @@ $sticker-size: 50;
 
 .root {
   position: relative;
+  background-color: #39393979; // Improved readability
+  border-radius: 8px;
+  width: 100%;
 
   .img-wrapper {
     position: relative;
-    height: 60px;
-    width: 60px;
     display: flex;
     align-items: center;
     z-index: 1;
+    height: 60px;
+    width: 60px;
+
     @media (max-width: 768px) {
-      height: 40px;
-      width: 40px;
+      height: 50px;
+      width: 50px;
     }
     img {
-      width: 100%;
+      padding: 8px;
+      width: calc(100%);
       z-index: 1;
       // alt attribute should be defined in the HTML, not here
     }
@@ -80,8 +85,8 @@ $sticker-size: 50;
 
   .number-of-el {
     position: absolute;
-    top: -2px;
-    right: -2px;
+    top: -12px;
+    right: -12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,13 +102,15 @@ $sticker-size: 50;
       font-size: 8px;
       width: 16px;
       height: 16px;
+      top: -8px;
+      right: -8px;
     }
   }
 
   .grid-container {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -12px;
+    left: -12px;
     transform: scale(1);
     transform-origin: top left;
     display: none; // Adjust as needed
@@ -113,7 +120,7 @@ $sticker-size: 50;
     padding: 16px;
     backdrop-filter: blur(5px);
     background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 10px 2px rgba(146, 252, 173, 0.2);
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.1);
     transition: transform 0.1s ease-in-out;
 
     @media (max-width: 768px) {

@@ -1,11 +1,11 @@
 import { forwardRef } from "react";
-import trashImg from "../../ressources/images/trash-can.png";
+import { ReactComponent as TrashSvg } from "../../ressources/images/trash-can.svg";
 import styles from "./trash.module.scss";
 
 const Trash = forwardRef((props, ref) => {
   return (
     <div className={styles.root} ref={ref}>
-      <img src={trashImg} draggable={false} alt="" />;
+      <TrashSvg className={styles.svg} />
     </div>
   );
 });

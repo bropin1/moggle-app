@@ -13,17 +13,17 @@ export default function useStickers() {
   const initialRotationRef = useRef(0);
 
   // useEffect(() => {
-  //   console.log("USE EFFECT useStickers.js");
+  //   ;
   //   if (
   //     activeIndex.current === -1 ||
   //     stickersRefs.current[activeIndex.current] === undefined
   //   )
   //     return;
 
-  //   console.log("activeIndex", activeIndex);
+  //   ;
 
   //   const activeStickerStyle = stickersRefs.current[activeIndex.current].style;
-  //   console.log("activeStickerStyle", activeStickerStyle);
+  //   ;
   //   //set position
   //   activeStickerStyle.left =
   //     stickerRealTime[activeIndex.current].position.x + "px";
@@ -32,7 +32,7 @@ export default function useStickers() {
   // }, [stickerRealTime, activeIndex]);
 
   // useEffect(() => {
-  //   console.log("USE EFFECT - activeIndex WATCHER - useStickers.js");
+  //   ;
   //   if (activeIndex.current === -1) return;
 
   //   const activeSticker = stickersRefs.current[activeIndex.current];
@@ -44,9 +44,7 @@ export default function useStickers() {
   //   });
   // }, [activeIndex]);
 
-  useEffect(() => {
-    console.log("useSticker RERENDER");
-  }, []);
+  useEffect(() => {}, []);
 
   //Rotation
   function setInitialRotation(initialRotation) {
@@ -54,15 +52,7 @@ export default function useStickers() {
   }
   function handleRotation(rotation) {
     if (activeIndex.current === null) return;
-    console.log(
-      "handleRotation() - initialRotationRef.current",
-      initialRotationRef.current
-    );
 
-    console.log(
-      "handleRotation() - initialRotationRef.current + rotation",
-      initialRotationRef.current + rotation
-    );
     setStickers((prevStickers) => {
       const newStickers = [...prevStickers];
       newStickers[activeIndex.current].rotation =
@@ -73,14 +63,11 @@ export default function useStickers() {
 
   //position
   function setInitialPosition(position) {
-    console.log("setInitialPosition()");
-    console.log("position :", position);
     if (position === null) return;
     initialPositionRef.current = position;
   }
 
   function handlePosition(position) {
-    console.log("handlePosition()");
     if (activeIndex.current === null) return;
     if (!position) return;
 
@@ -110,8 +97,6 @@ export default function useStickers() {
 
   //generation
   function generateSticker(img, initialPosition) {
-    console.log("generateSticker()");
-    console.log(`generateSticker() - activeIndex : `, activeIndex);
     const key = generateId();
     let newSticker = {
       key,
@@ -155,7 +140,6 @@ export default function useStickers() {
   }
 
   function setActiveSticker(index) {
-    console.log("setActiveSticker(index)");
     if (index === activeIndex.current) return;
     if (stickersRefs.current === null) return;
     setActiveIndex((previousActiveIndex) => {

@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
+
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -16,68 +17,53 @@
   -ms-user-select: none;
 
   .header {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 8px 0;
+    padding: 16px 16px;
     z-index: 1;
-    padding-bottom: 20px;
+
     @media (max-width: 768px) {
-      padding-bottom: 16px;
+      padding: 8px 8px;
     }
     .sticker-generator-wrapper {
       border-radius: 8px;
       color: #fff; /* White text for better contrast */
-      background-color: #a2b3ff; /* Neon blue background color */
-      box-shadow: 0 0 5px #00f, /* Inner blue glow */ 0 0 10px #00f,
-        /* Middle blue glow */ 0 0 10px #00f,
-        /* Outer blue glow */ 0 0 30px #00f; /* Far outer blue glow */
       display: flex;
       flex-direction: row;
       align-items: center;
-      column-gap: 32px;
-      padding: 4px 16px;
+      column-gap: 16px;
+
       z-index: 1;
 
-      @media (max-width: 768px) {
-        padding: 0px 8px;
+      .wrapper {
+        background-color: #39393979;
+        height: 60px;
+        width: 60px;
+        border-radius: 8px;
+        display: flex;
+        align-items: end;
+        @media (max-width: 768px) {
+          height: 50px;
+          width: 50px;
+        }
       }
     }
   }
 
   .img-canvas-wrapper {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(128, 255, 128);
-    box-shadow: 0 0 30px 2px limegreen; /* X-offset, Y-offset, blur radius, spread radius, color */
+    background-color: rgb(30, 30, 30);
     width: 100%;
     border-radius: 8px;
     z-index: 0;
-
-    .instruction {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 70%;
-      transform: translate(-50%, -50%);
-      font-size: 40px;
-      color: black;
-      font-weight: 700;
-      z-index: 0;
-      text-align: center;
-      @media (max-width: 768px) {
-        display: none;
-      }
-      span {
-        font-size: inherit;
-        white-space: nowrap;
-      }
-    }
 
     canvas {
       background-color: transparent;

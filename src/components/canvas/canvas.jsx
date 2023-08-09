@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect, forwardRef } from "react";
+import React, { useRef, useEffect, forwardRef } from "react";
 import globalStyles from "../../styles/globalStyles.module.scss";
 import styles from "./canvas.module.scss";
 import mgl1 from "../../ressources/images/mgl1.png";
@@ -12,6 +12,9 @@ import mgl8 from "../../ressources/images/mgl8.png";
 import mgl9 from "../../ressources/images/mgl9.png";
 import mgl10 from "../../ressources/images/mgl10.png";
 import mgl11 from "../../ressources/images/mgl11.png";
+import mgl12 from "../../ressources/images/mgl12.png";
+import mglg1 from "../../ressources/images/mglg1.png";
+import mglg2 from "../../ressources/images/mglg2.png";
 import pipe1 from "../../ressources/images/pipe1.png";
 import GridContainer from "../wrapper/gridContainer";
 import Sticker from "../sticker/sticker";
@@ -24,8 +27,6 @@ const Canvas = forwardRef(
     const canvasRef = useRef(null);
     const imgCanvasWrapperRef = useRef(null);
     const headerRef = useRef(null);
-
-    console.log("globalStyles", globalStyles);
 
     const {
       stickers,
@@ -42,12 +43,11 @@ const Canvas = forwardRef(
     } = useCanvasInteractions(canvasRef);
 
     useEffect(() => {
-      console.log("canvas RERENDER");
       const headerHeight = headerRef.current.offsetHeight;
-      imgCanvasWrapperRef.current.style.top = headerHeight + "px";
-      imgCanvasWrapperRef.current.style.height = `calc(100% - ${
-        headerHeight + "px"
-      }`;
+      // imgCanvasWrapperRef.current.style.top = headerHeight + "px";
+      // imgCanvasWrapperRef.current.style.height = `calc(100% - ${
+      //   headerHeight + "px"
+      // }`;
 
       if (!uploadedImage) return;
       const aspectRatio = uploadedImage.width / uploadedImage.height;
@@ -56,7 +56,7 @@ const Canvas = forwardRef(
 
       //add logic to handle canvas max height // image spills out of canvas if width is too big
       if (aspectRatio < 1) {
-        height = canvasRef.current.offsetHeight - headerHeight;
+        height = canvasRef.current.offsetHeight;
         width = height * aspectRatio;
         if (canvasRef.current.offsetwidth < width) {
           width = canvasRef.current.offsetWidth;
@@ -65,22 +65,13 @@ const Canvas = forwardRef(
       } else {
         width = canvasRef.current.offsetWidth;
         height = width / aspectRatio;
-        if (canvasRef.current.offsetHeight - headerHeight < height) {
-          height = canvasRef.current.offsetHeight - headerHeight;
+        if (canvasRef.current.offsetHeight < height) {
+          height = canvasRef.current.offsetHeight;
           width = height * aspectRatio;
         }
       }
 
       if (saveImage) {
-        console.log("SAVE IMAGE");
-        console.log(
-          canvasRef.current.offsetLeft,
-          "canvasRef.current.offsetLeft"
-        );
-        console.log(
-          imgCanvasRef.current.offsetLeft,
-          "imgCanvasRef.current.offsetLeft"
-        );
         saveCompositeImage(
           uploadedImage,
           stickers,
@@ -159,8 +150,6 @@ const Canvas = forwardRef(
                 img={mgl9}
                 handleGenerateSticker={handleGenerateSticker}
               />
-            </GridContainer>
-            <GridContainer iconImg={mgl10} headerRef={headerRef}>
               <StickerGenerator
                 img={mgl10}
                 handleGenerateSticker={handleGenerateSticker}
@@ -169,23 +158,33 @@ const Canvas = forwardRef(
                 img={mgl11}
                 handleGenerateSticker={handleGenerateSticker}
               />
+              <StickerGenerator
+                img={mgl12}
+                handleGenerateSticker={handleGenerateSticker}
+              />
             </GridContainer>
-            <StickerGenerator
-              img={pipe1}
-              handleGenerateSticker={handleGenerateSticker}
-            />
+            <GridContainer iconImg={mglg1} headerRef={headerRef}>
+              <StickerGenerator
+                img={mglg1}
+                handleGenerateSticker={handleGenerateSticker}
+              />
+              <StickerGenerator
+                img={mglg2}
+                handleGenerateSticker={handleGenerateSticker}
+              />
+            </GridContainer>
+            <div className={styles.wrapper}>
+              <StickerGenerator
+                img={pipe1}
+                handleGenerateSticker={handleGenerateSticker}
+              />
+            </div>
           </div>
 
           <Trash ref={trashRef} inTrash={inTrash} />
         </div>
 
         <div className={styles["img-canvas-wrapper"]} ref={imgCanvasWrapperRef}>
-          {!uploadedImage && (
-            <span className={styles.instruction}>
-              Hold CTRL or CMD on a sticker and drag to
-              <span> scale &#8592; &#8594; and rotate &#8593; &#8595;</span>
-            </span>
-          )}
           <canvas ref={imgCanvasRef} />
         </div>
 

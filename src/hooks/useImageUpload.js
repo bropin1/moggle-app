@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useImageUpload(imgRef) {
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const [image, setImage] = useState(null);
   function handleImageUpload(event) {
     const file = event.target.files[0];
     if (file && file.type.match(/^image\//)) {
@@ -14,13 +14,13 @@ export default function useImageUpload(imgRef) {
 
         // Assign src of this image object
         img.src = e.target.result;
-        setUploadedImage(img);
+        setImage(img);
       };
       reader.readAsDataURL(file);
     } else {
-      setUploadedImage(null);
+      setImage(null);
     }
   }
 
-  return { uploadedImage, handleImageUpload };
+  return { image, handleImageUpload };
 }

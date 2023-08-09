@@ -19,8 +19,6 @@ const Sticker = forwardRef(
     const localRef = useRef(null);
     const focusHelperRef = useRef(null);
     useEffect(() => {
-      console.log("RENDER STICKER" + index);
-
       localRef.current.style.left = position.x + "px";
       localRef.current.style.top = position.y + "px";
       localRef.current.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
@@ -35,8 +33,7 @@ const Sticker = forwardRef(
 
       focusHelperRef.current.style.backgroundColor =
         inTrash && activeIndex.current === index ? "red" : "";
-      focusHelperRef.current.style.border =
-        inTrash && activeIndex.current === index ? "2px solid red" : "";
+
       focusHelperRef.current.style.boxShadow =
         inTrash && activeIndex.current === index ? "none" : "";
     }, [activeIndex, index, position, rotation, scale, ref, inTrash]);
@@ -51,7 +48,12 @@ const Sticker = forwardRef(
         onMouseDown={handleActiveSticker}
         onTouchStart={handleActiveSticker}
       >
-        <div className={styles["focus-helper"]} ref={focusHelperRef} />
+        <div className={styles["focus-helper"]} ref={focusHelperRef}>
+          <div className={`${styles.corner} ${styles["top-left"]}`}></div>
+          <div className={`${styles.corner} ${styles["top-right"]}`}></div>
+          <div className={`${styles.corner} ${styles["bottom-right"]}`}></div>
+          <div className={`${styles.corner} ${styles["bottom-left"]}`}></div>
+        </div>
         <img src={img} alt="" draggable={false} />
       </div>
     );

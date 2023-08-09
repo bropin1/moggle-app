@@ -28,13 +28,9 @@ export default function useCanvasInteractions(canvasRef) {
     handleRotation,
   } = useStickers();
 
-  useEffect(() => {
-    console.log("useCanvasInteractions RERENDER");
-  }, []);
+  useEffect(() => {}, []);
 
   const handleGenerateSticker = (event, img, elRef) => {
-    console.log("handleGenerateSticker()");
-
     // setMouseOrigin
     const clientX =
       event.type === "touchstart" ? event.touches[0].clientX : event.clientX;
@@ -55,12 +51,6 @@ export default function useCanvasInteractions(canvasRef) {
 
   const handleInteractionMove = useCallback(
     (event) => {
-      console.log("handleInteractionMove()");
-      console.log(
-        "handleInteractionMove() - activeIndex.current",
-        activeIndex.current
-      );
-
       if (activeIndex.current === -1) return;
 
       const clientX =
@@ -96,8 +86,6 @@ export default function useCanvasInteractions(canvasRef) {
         //angle
         const currentRotation = (Math.atan2(dy, dx) * 180) / Math.PI;
         const deltaRotation = currentRotation - initialFingersAngle;
-        console.log("handleInteractionMove() - rotation", deltaRotation);
-
         handleRotation(deltaRotation);
 
         return;
@@ -138,7 +126,6 @@ export default function useCanvasInteractions(canvasRef) {
   );
 
   useEffect(() => {
-    console.log("MAIN useEffect");
     if (canvasRef.current === null) return;
     const canvas = canvasRef.current;
 
@@ -169,7 +156,6 @@ export default function useCanvasInteractions(canvasRef) {
 
   const handleInteractionStart = useCallback(
     (event, index) => {
-      console.log("handleInteractionStart()");
       const newIndex = index ?? activeIndex.current;
       const clientX =
         event.type === "touchstart" ? event.touches[0].clientX : event.clientX;
@@ -184,8 +170,6 @@ export default function useCanvasInteractions(canvasRef) {
         const distance = Math.sqrt(dx * dx + dy * dy);
         const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
         initialDistanceRef.current = distance;
-
-        console.log("handleInteractionStart() - distance", distance);
 
         setInitialFingersAngle(angle);
         setInitialRotation(stickers[newIndex].rotation);
@@ -216,7 +200,6 @@ export default function useCanvasInteractions(canvasRef) {
   );
 
   useEffect(() => {
-    console.log("SECOND useEffect");
     if (activeIndex === -1) return;
 
     if (stickersLengthRef.current !== stickers.length) {
@@ -224,7 +207,7 @@ export default function useCanvasInteractions(canvasRef) {
 
       // if ("ontouchstart" in window && false) {
       //   // For touch devices
-      //   console.log("line 250- useCanvasInteraction");
+      //   ;
       //   syntheticEvent = new TouchEvent("touchstart", {
       //     touches: [
       //       {
@@ -246,7 +229,6 @@ export default function useCanvasInteractions(canvasRef) {
   }, [stickers.length, handleInteractionStart, activeIndex]);
 
   const handleInteractionEnd = (event) => {
-    console.log("handleInteractionEnd()");
     if (activeIndex.current === -1) return;
 
     if (stickersRefs?.current[activeIndex.current] === null) return;
