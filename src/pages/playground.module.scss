@@ -3,7 +3,6 @@
 }
 
 body {
-  background: linear-gradient(135deg, #00ff7f, #3d30af, #6d31c9, #952cb7);
   color: #fff;
 }
 
@@ -55,12 +54,14 @@ header {
     }
   }
 }
+
 .container {
   display: flex;
   width: 100%;
   flex: 1;
+  min-height: 0;
   flex-direction: column;
-  background-color: rgb(22, 22, 22);
+  background-color: rgb(39, 39, 39);
   border: 2px dashed #aeaeae;
   border-radius: 16px;
   justify-content: center;
