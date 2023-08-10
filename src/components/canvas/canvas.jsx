@@ -43,12 +43,6 @@ const Canvas = forwardRef(
     } = useCanvasInteractions(canvasRef);
 
     useEffect(() => {
-      const headerHeight = headerRef.current.offsetHeight;
-      // imgCanvasWrapperRef.current.style.top = headerHeight + "px";
-      // imgCanvasWrapperRef.current.style.height = `calc(100% - ${
-      //   headerHeight + "px"
-      // }`;
-
       if (!uploadedImage) return;
       const aspectRatio = uploadedImage.width / uploadedImage.height;
 
@@ -89,15 +83,18 @@ const Canvas = forwardRef(
         setSaveImage(false);
       }
 
-      imgCanvasRef.current.width = width;
-      imgCanvasRef.current.height = height;
-      imgCanvasRef.current.style.width = width + "px";
-      imgCanvasRef.current.style.height = height + "px";
+      const image = new Image();
+      image.src = uploadedImage.src;
+      image.onload = () => {
+        imgCanvasRef.current.width = width;
+        imgCanvasRef.current.height = height;
+        imgCanvasRef.current.style.width = width + "px";
+        imgCanvasRef.current.style.height = height + "px";
 
-      imgCanvasRef.current
-        .getContext("2d")
-        .drawImage(uploadedImage, 0, 0, width, height);
-
+        imgCanvasRef.current
+          .getContext("2d")
+          .drawImage(uploadedImage, 0, 0, width, height);
+      };
       return () => {};
     }, [uploadedImage, imgCanvasRef, saveImage, setSaveImage, stickers]);
 
