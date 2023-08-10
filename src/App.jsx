@@ -1,7 +1,6 @@
 import { useEffect, createContext } from "react";
 import "./App.css";
 import Playground from "./pages/playground";
-import { useState } from "react";
 import { ViewportProvider } from "./context/viewportCtxt";
 
 function App() {

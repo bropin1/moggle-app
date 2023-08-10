@@ -52,6 +52,7 @@ const Canvas = forwardRef(
     } = useCanvasInteractions(canvasRef);
 
     useEffect(() => {
+      console.log("USE EFFECT CANVAS");
       if (!imageLoaded || !uploadedImage) return;
 
       const aspectRatio = uploadedImage.width / uploadedImage.height;
@@ -75,6 +76,11 @@ const Canvas = forwardRef(
         }
       }
 
+      imgCanvasRef.current.width = width;
+      imgCanvasRef.current.height = height;
+      imgCanvasRef.current.style.width = width + "px";
+      imgCanvasRef.current.style.height = height + "px";
+
       if (saveImage) {
         saveCompositeImage(
           uploadedImage,
@@ -92,10 +98,6 @@ const Canvas = forwardRef(
         );
         setSaveImage(false);
       }
-      imgCanvasRef.current.width = width;
-      imgCanvasRef.current.height = height;
-      imgCanvasRef.current.style.width = width + "px";
-      imgCanvasRef.current.style.height = height + "px";
 
       imgCanvasRef.current
         .getContext("2d")
@@ -109,6 +111,7 @@ const Canvas = forwardRef(
       setSaveImage,
       stickers,
       imageLoaded,
+      viewport,
     ]);
 
     useEffect(() => {
@@ -116,7 +119,7 @@ const Canvas = forwardRef(
       return () => {
         window.removeEventListener("click", handleClickOutside);
       };
-    }, [handleClickOutside, viewport]);
+    }, [handleClickOutside]);
 
     return (
       <div

@@ -11,7 +11,10 @@ export const ViewportProvider = ({ children }) => {
         "--vh",
         `${window.innerHeight * 0.01}px`
       );
-      setViewport(window.innerHeight);
+      setViewport({
+        windowHeight: window.innerHeight,
+        windowWidth: window.innerWidth,
+      });
     };
 
     setVhProperty(); // Set the initial value
