@@ -16,6 +16,7 @@ import mgl12 from "../../ressources/images/mgl12.png";
 import mglg1 from "../../ressources/images/mglg1.png";
 import mglg2 from "../../ressources/images/mglg2.png";
 import pipe1 from "../../ressources/images/pipe1.png";
+import resetSvg from "../../ressources/images/reset.svg";
 import { ReactComponent as ResetSvg } from "../../ressources/images/reset.svg";
 import GridContainer from "../wrapper/gridContainer";
 import Sticker from "../sticker/sticker";
@@ -196,7 +197,9 @@ const Canvas = forwardRef(
           <div className={styles["cancel-buttons"]}>
             <div className={styles["reset"]} onClick={handleReset}>
               <ResetSvg />
+              {/* <img src={resetSvg} alt="" /> */}
             </div>
+
             <Trash
               ref={trashRef}
               inTrash={inTrash}
