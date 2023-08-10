@@ -16,6 +16,21 @@ export default function Playground() {
     console.log("SAVE IMAGE");
   };
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const file = { target: e.dataTransfer };
+      handleImageUpload(file);
+    }
+  };
+
   return (
     <div className={styles.root}>
       <header>
@@ -27,11 +42,13 @@ export default function Playground() {
       </header>
       <div
         className={styles.container}
-        style={{ border: image ? "0" : "4px dashed rgb(255, 255, 255)" }}
+        style={{ border: image ? "0" : " 2px dashed #aeaeae" }}
       >
         <div
-          className={styles["upload-button"]}
-          style={{ display: image ? "none" : "block" }}
+          className={styles["drag-drop"]}
+          style={{ display: image ? "none" : "flex" }}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
         >
           <input
             type="file"
@@ -41,7 +58,7 @@ export default function Playground() {
             onChange={handleImageUpload}
             style={{ display: "none" }}
           />
-          <label htmlFor="imageUpload">Upload Image</label>
+          <label htmlFor="imageUpload">Drop your image here</label>
         </div>
 
         <div

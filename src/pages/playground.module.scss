@@ -61,10 +61,33 @@ header {
   flex: 1;
   flex-direction: column;
   background-color: rgb(22, 22, 22);
-  border: 4px dashed rgb(255, 255, 255);
+  border: 2px dashed #aeaeae;
   border-radius: 16px;
   justify-content: center;
   position: relative;
+
+  .drag-drop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    width: 100%;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    label {
+      display: flex;
+      font-size: 24px;
+      font-weight: 700;
+      color: #aeaeae;
+      cursor: pointer;
+      height: 100%;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 
   .upload-button,
   .save-button {
