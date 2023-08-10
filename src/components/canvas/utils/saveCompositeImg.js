@@ -7,6 +7,8 @@ export default async function saveCompositeImage(
   bgDisplayedWidth,
   stickerSize
 ) {
+  console.log("saveCompositeImage");
+  console.log("stickers", stickers.length);
   if (stickers.length === 0) return;
   const ratio = bgImg.width / bgDisplayedWidth;
   const imageCache = {};
