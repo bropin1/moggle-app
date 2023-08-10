@@ -12,6 +12,7 @@ export default function useCanvasInteractions(canvasRef) {
   const initialDistanceRef = useRef(null);
   const [initialFingersAngle, setInitialFingersAngle] = useState(0);
   const trashRef = useRef(null);
+  const [moved, setMoved] = useState(false);
 
   const {
     stickers,
@@ -26,6 +27,9 @@ export default function useCanvasInteractions(canvasRef) {
     handleScale,
     setInitialRotation,
     handleRotation,
+    initialPositionRef,
+    initialScaleRef,
+    initialRotationRef,
   } = useStickers();
 
   useEffect(() => {}, []);
@@ -98,12 +102,8 @@ export default function useCanvasInteractions(canvasRef) {
         handleScale(newScale);
 
         //Rotation
-        //Threshold check for significant vertical mouse movement.
-        const rotationThreshold = 5; // Choose a value that feels right for your application
-        if (Math.abs(deltaY) > rotationThreshold) {
-          const rotation = deltaY * 0.8; // Adjust this to control rotation speed
-          handleRotation(rotation);
-        }
+        const rotation = deltaY * 0.8; // Adjust this to control rotation speed
+        handleRotation(rotation);
       } else if (isMouseDownRef.current) {
         //Position
         handlePosition({
@@ -201,23 +201,8 @@ export default function useCanvasInteractions(canvasRef) {
 
   useEffect(() => {
     if (activeIndex === -1) return;
-
     if (stickersLengthRef.current !== stickers.length) {
       let syntheticEvent;
-
-      // if ("ontouchstart" in window && false) {
-      //   // For touch devices
-      //   ;
-      //   syntheticEvent = new TouchEvent("touchstart", {
-      //     touches: [
-      //       {
-      //         clientX: mousePositionRef.current.x,
-      //         clientY: mousePositionRef.current.y,
-      //       },
-      //     ],
-      //   });
-      // } else {
-      // For non-touch devices
       syntheticEvent = new MouseEvent("mousedown", {
         clientX: mousePositionRef.current.x,
         clientY: mousePositionRef.current.y,
@@ -230,11 +215,8 @@ export default function useCanvasInteractions(canvasRef) {
 
   const handleInteractionEnd = (event) => {
     if (activeIndex.current === -1) return;
-
     if (stickersRefs?.current[activeIndex.current] === null) return;
-
     isMouseDownRef.current = false;
-
     if (
       isIntersecting(
         trashRef.current,
@@ -247,13 +229,50 @@ export default function useCanvasInteractions(canvasRef) {
     }
   };
 
+  const handleOnClickDelete = () => {
+    deleteActiveSticker();
+    stickersLengthRef.current -= 1;
+  };
+
+  const handleClickOutside = useCallback(() => {
+    if (
+      !stickers[activeIndex.current] ||
+      !initialPositionRef?.current ||
+      !initialScaleRef?.current ||
+      initialRotationRef?.current == null
+    ) {
+      return;
+    }
+
+    const sticker = stickers[activeIndex.current];
+    const notMoved =
+      sticker.position.x === initialPositionRef.current.x &&
+      sticker.position.y === initialPositionRef.current.y;
+
+    const notScaled = sticker.scale === initialScaleRef.current;
+
+    const notRotated = sticker.rotation === initialRotationRef.current;
+
+    if (notMoved && notScaled && notRotated) {
+      setActiveSticker(-1);
+    }
+  }, [
+    stickers,
+    initialPositionRef,
+    activeIndex,
+    setActiveSticker,
+    initialScaleRef,
+    initialRotationRef,
+  ]);
+
   const handleActiveSticker = useCallback(
     (event, index) => {
+      if (activeIndex.current === index) return;
       event.stopPropagation();
       setActiveSticker(index);
       handleInteractionStart(event, index);
     },
-    [setActiveSticker, handleInteractionStart]
+    [setActiveSticker, handleInteractionStart, activeIndex]
   );
 
   return {
@@ -267,5 +286,7 @@ export default function useCanvasInteractions(canvasRef) {
     handleGenerateSticker,
     trashRef,
     inTrash,
+    handleClickOutside,
+    handleOnClickDelete,
   };
 }

@@ -12,38 +12,6 @@ export default function useStickers() {
   const initialPositionRef = useRef({ x: 0, y: 0 });
   const initialRotationRef = useRef(0);
 
-  // useEffect(() => {
-  //   ;
-  //   if (
-  //     activeIndex.current === -1 ||
-  //     stickersRefs.current[activeIndex.current] === undefined
-  //   )
-  //     return;
-
-  //   ;
-
-  //   const activeStickerStyle = stickersRefs.current[activeIndex.current].style;
-  //   ;
-  //   //set position
-  //   activeStickerStyle.left =
-  //     stickerRealTime[activeIndex.current].position.x + "px";
-  //   activeStickerStyle.top =
-  //     stickerRealTime[activeIndex.current].position.y + "px";
-  // }, [stickerRealTime, activeIndex]);
-
-  // useEffect(() => {
-  //   ;
-  //   if (activeIndex.current === -1) return;
-
-  //   const activeSticker = stickersRefs.current[activeIndex.current];
-
-  //   //set initialPosition
-  //   setInitialPosition({
-  //     x: activeSticker.offsetLeft,
-  //     y: activeSticker.offsetTop,
-  //   });
-  // }, [activeIndex]);
-
   useEffect(() => {}, []);
 
   //Rotation
@@ -140,7 +108,8 @@ export default function useStickers() {
   }
 
   function setActiveSticker(index) {
-    if (index === activeIndex.current) return;
+    if (index === activeIndex.current && index !== -1) return;
+
     if (stickersRefs.current === null) return;
     setActiveIndex((previousActiveIndex) => {
       return {
@@ -163,5 +132,8 @@ export default function useStickers() {
     handleScale,
     setInitialRotation,
     handleRotation,
+    initialPositionRef,
+    initialScaleRef,
+    initialRotationRef,
   };
 }

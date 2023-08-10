@@ -9,7 +9,7 @@ export default function Playground() {
   const [saveImage, setSaveImage] = useState(false);
   const imgCanvasRef = useRef(null);
 
-  const { image, handleImageUpload } = useImageUpload();
+  const { image, handleImageUpload, imageLoaded } = useImageUpload();
 
   const handleSaveImage = () => {
     setSaveImage(true);
@@ -36,8 +36,9 @@ export default function Playground() {
       <header>
         <h1>LET&#39;S GET $MOGGED!</h1>
         <span className={styles.instruction}>
-          Hold CTRL or CMD on a sticker and drag to
-          <span> scale &#8592; &#8594; or rotate &#8593; &#8595;</span>
+          Hold <b>CTRL </b>or <b>CMD</b> on a sticker and <b>DRAG</b> to the{" "}
+          <b>RIGHT &#8594;</b> to <b>SCALE</b> or <b>UP &#8593;</b> to{" "}
+          <b>ROTATE</b>
         </span>
       </header>
       <div
@@ -67,6 +68,7 @@ export default function Playground() {
         >
           <Canvas
             uploadedImage={image}
+            imageLoaded={imageLoaded}
             imgCanvasRef={imgCanvasRef}
             saveImage={saveImage}
             setSaveImage={setSaveImage}

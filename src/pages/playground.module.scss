@@ -42,15 +42,15 @@ header {
   .instruction {
     color: white;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 500;
     z-index: 0;
 
     @media (max-width: 768px) {
       display: none;
     }
-    span {
+
+    b {
       font-size: inherit;
-      white-space: nowrap;
     }
   }
 }

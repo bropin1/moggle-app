@@ -9,7 +9,6 @@ const Sticker = forwardRef(
       scale,
       rotation,
       handleActiveSticker,
-
       index,
       activeIndex,
       inTrash,
@@ -47,6 +46,10 @@ const Sticker = forwardRef(
         }}
         onMouseDown={handleActiveSticker}
         onTouchStart={handleActiveSticker}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
       >
         <div className={styles["focus-helper"]} ref={focusHelperRef}>
           <div className={`${styles.corner} ${styles["top-left"]}`}></div>

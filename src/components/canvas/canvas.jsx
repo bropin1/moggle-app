@@ -23,7 +23,7 @@ import useCanvasInteractions from "./hooks/useCanvasInteraction";
 import Trash from "../trash/trash";
 import saveCompositeImage from "./utils/saveCompositeImg";
 const Canvas = forwardRef(
-  ({ uploadedImage, imgCanvasRef, saveImage, setSaveImage }) => {
+  ({ uploadedImage, imgCanvasRef, saveImage, setSaveImage, imageLoaded }) => {
     const canvasRef = useRef(null);
     const imgCanvasWrapperRef = useRef(null);
     const headerRef = useRef(null);
@@ -40,10 +40,13 @@ const Canvas = forwardRef(
       handleGenerateSticker,
       trashRef,
       inTrash,
+      handleClickOutside,
+      handleOnClickDelete,
     } = useCanvasInteractions(canvasRef);
 
     useEffect(() => {
-      if (!uploadedImage) return;
+      if (!imageLoaded) return;
+
       const aspectRatio = uploadedImage.width / uploadedImage.height;
 
       let width, height;
@@ -82,21 +85,31 @@ const Canvas = forwardRef(
         );
         setSaveImage(false);
       }
+      imgCanvasRef.current.width = width;
+      imgCanvasRef.current.height = height;
+      imgCanvasRef.current.style.width = width + "px";
+      imgCanvasRef.current.style.height = height + "px";
 
-      const image = new Image();
-      image.src = uploadedImage.src;
-      image.onload = () => {
-        imgCanvasRef.current.width = width;
-        imgCanvasRef.current.height = height;
-        imgCanvasRef.current.style.width = width + "px";
-        imgCanvasRef.current.style.height = height + "px";
+      imgCanvasRef.current
+        .getContext("2d")
+        .drawImage(uploadedImage, 0, 0, width, height);
 
-        imgCanvasRef.current
-          .getContext("2d")
-          .drawImage(uploadedImage, 0, 0, width, height);
-      };
       return () => {};
-    }, [uploadedImage, imgCanvasRef, saveImage, setSaveImage, stickers]);
+    }, [
+      uploadedImage,
+      imgCanvasRef,
+      saveImage,
+      setSaveImage,
+      stickers,
+      imageLoaded,
+    ]);
+
+    useEffect(() => {
+      window.addEventListener("click", handleClickOutside);
+      return () => {
+        window.removeEventListener("click", handleClickOutside);
+      };
+    }, [handleClickOutside]);
 
     return (
       <div
@@ -178,7 +191,11 @@ const Canvas = forwardRef(
             </div>
           </div>
 
-          <Trash ref={trashRef} inTrash={inTrash} />
+          <Trash
+            ref={trashRef}
+            inTrash={inTrash}
+            handleOnClickDelete={handleOnClickDelete}
+          />
         </div>
 
         <div className={styles["img-canvas-wrapper"]} ref={imgCanvasWrapperRef}>
