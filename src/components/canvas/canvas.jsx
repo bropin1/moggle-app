@@ -52,9 +52,6 @@ const Canvas = forwardRef(
     } = useCanvasInteractions(canvasRef);
 
     useEffect(() => {
-      console.log("USE EFFECT CANVAS");
-      console.log("saveImage:", saveImage);
-      console.log(imageLoaded);
       if (!uploadedImage) return;
 
       const aspectRatio = uploadedImage.width / uploadedImage.height;
@@ -84,7 +81,6 @@ const Canvas = forwardRef(
       imgCanvasRef.current.style.height = height + "px";
 
       if (saveImage) {
-        console.log("SAVE IMAGE use effect");
         saveCompositeImage(
           uploadedImage,
           stickers,

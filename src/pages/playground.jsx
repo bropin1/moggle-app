@@ -13,7 +13,7 @@ export default function Playground() {
 
   const handleSaveImage = () => {
     setSaveImage(true);
-    console.log("SAVE IMAGE");
+
     //set a counter copilot
     setInterval(() => {
       setSaveImage(false);
