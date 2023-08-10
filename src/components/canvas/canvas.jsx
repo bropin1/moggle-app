@@ -16,12 +16,14 @@ import mgl12 from "../../ressources/images/mgl12.png";
 import mglg1 from "../../ressources/images/mglg1.png";
 import mglg2 from "../../ressources/images/mglg2.png";
 import pipe1 from "../../ressources/images/pipe1.png";
+import { ReactComponent as ResetSvg } from "../../ressources/images/reset.svg";
 import GridContainer from "../wrapper/gridContainer";
 import Sticker from "../sticker/sticker";
 import StickerGenerator from "../stickerGenerator/stickerGenerator";
 import useCanvasInteractions from "./hooks/useCanvasInteraction";
 import Trash from "../trash/trash";
 import saveCompositeImage from "./utils/saveCompositeImg";
+
 const Canvas = forwardRef(
   ({ uploadedImage, imgCanvasRef, saveImage, setSaveImage, imageLoaded }) => {
     const canvasRef = useRef(null);
@@ -42,10 +44,11 @@ const Canvas = forwardRef(
       inTrash,
       handleClickOutside,
       handleOnClickDelete,
+      handleReset,
     } = useCanvasInteractions(canvasRef);
 
     useEffect(() => {
-      if (!imageLoaded) return;
+      if (!imageLoaded || !uploadedImage) return;
 
       const aspectRatio = uploadedImage.width / uploadedImage.height;
 
@@ -190,12 +193,16 @@ const Canvas = forwardRef(
               />
             </div>
           </div>
-
-          <Trash
-            ref={trashRef}
-            inTrash={inTrash}
-            handleOnClickDelete={handleOnClickDelete}
-          />
+          <div className={styles["cancel-buttons"]}>
+            <div className={styles["reset"]} onClick={handleReset}>
+              <ResetSvg />
+            </div>
+            <Trash
+              ref={trashRef}
+              inTrash={inTrash}
+              handleOnClickDelete={handleOnClickDelete}
+            />
+          </div>
         </div>
 
         <div className={styles["img-canvas-wrapper"]} ref={imgCanvasWrapperRef}>

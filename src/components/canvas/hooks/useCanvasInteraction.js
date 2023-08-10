@@ -12,7 +12,6 @@ export default function useCanvasInteractions(canvasRef) {
   const initialDistanceRef = useRef(null);
   const [initialFingersAngle, setInitialFingersAngle] = useState(0);
   const trashRef = useRef(null);
-  const [moved, setMoved] = useState(false);
 
   const {
     stickers,
@@ -30,6 +29,7 @@ export default function useCanvasInteractions(canvasRef) {
     initialPositionRef,
     initialScaleRef,
     initialRotationRef,
+    resetStickers,
   } = useStickers();
 
   useEffect(() => {}, []);
@@ -127,6 +127,7 @@ export default function useCanvasInteractions(canvasRef) {
 
   useEffect(() => {
     if (canvasRef.current === null) return;
+
     const canvas = canvasRef.current;
 
     function handleKeyDown(e) {
@@ -201,6 +202,7 @@ export default function useCanvasInteractions(canvasRef) {
 
   useEffect(() => {
     if (activeIndex === -1) return;
+
     if (stickersLengthRef.current !== stickers.length) {
       let syntheticEvent;
       syntheticEvent = new MouseEvent("mousedown", {
@@ -265,6 +267,11 @@ export default function useCanvasInteractions(canvasRef) {
     initialRotationRef,
   ]);
 
+  const handleReset = () => {
+    resetStickers();
+    stickersLengthRef.current = 0;
+  };
+
   const handleActiveSticker = useCallback(
     (event, index) => {
       if (activeIndex.current === index) return;
@@ -288,5 +295,6 @@ export default function useCanvasInteractions(canvasRef) {
     inTrash,
     handleClickOutside,
     handleOnClickDelete,
+    handleReset,
   };
 }

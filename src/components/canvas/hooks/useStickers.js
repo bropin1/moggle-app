@@ -12,7 +12,16 @@ export default function useStickers() {
   const initialPositionRef = useRef({ x: 0, y: 0 });
   const initialRotationRef = useRef(0);
 
-  useEffect(() => {}, []);
+  function resetStickers() {
+    setStickers([]);
+    setActiveIndex({
+      previous: -1,
+      current: -1,
+    });
+    initialScaleRef.current = 1;
+    initialPositionRef.current = { x: 0, y: 0 };
+    initialRotationRef.current = 0;
+  }
 
   //Rotation
   function setInitialRotation(initialRotation) {
@@ -135,5 +144,6 @@ export default function useStickers() {
     initialPositionRef,
     initialScaleRef,
     initialRotationRef,
+    resetStickers,
   };
 }

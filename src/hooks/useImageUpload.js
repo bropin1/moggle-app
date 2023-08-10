@@ -4,6 +4,7 @@ export default function useImageUpload(imgRef) {
   const [image, setImage] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   function handleImageUpload(event) {
+    if (!event.target.files.length) return;
     const file = event.target.files[0];
     if (file && file.type.match(/^image\//)) {
       const reader = new FileReader();
@@ -28,5 +29,6 @@ export default function useImageUpload(imgRef) {
   useEffect(() => {
     setImageLoaded(false);
   }, [image]);
+
   return { image, handleImageUpload, imageLoaded };
 }
