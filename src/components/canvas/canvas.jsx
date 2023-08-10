@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, forwardRef } from "react";
+import React, { useRef, useEffect, forwardRef, useContext } from "react";
 import globalStyles from "../../styles/globalStyles.module.scss";
 import styles from "./canvas.module.scss";
 import mgl1 from "../../ressources/images/mgl1.png";
@@ -15,6 +15,8 @@ import mgl11 from "../../ressources/images/mgl11.png";
 import mgl12 from "../../ressources/images/mgl12.png";
 import mglg1 from "../../ressources/images/mglg1.png";
 import mglg2 from "../../ressources/images/mglg2.png";
+import mgls1 from "../../ressources/images/mgls1.png";
+import mgls2 from "../../ressources/images/mgls2.png";
 import pipe1 from "../../ressources/images/pipe1.png";
 import resetSvg from "../../ressources/images/reset.svg";
 import { ReactComponent as ResetSvg } from "../../ressources/images/reset.svg";
@@ -24,13 +26,14 @@ import StickerGenerator from "../stickerGenerator/stickerGenerator";
 import useCanvasInteractions from "./hooks/useCanvasInteraction";
 import Trash from "../trash/trash";
 import saveCompositeImage from "./utils/saveCompositeImg";
+import ViewportContext from "../../context/viewportCtxt.js";
 
 const Canvas = forwardRef(
   ({ uploadedImage, imgCanvasRef, saveImage, setSaveImage, imageLoaded }) => {
     const canvasRef = useRef(null);
     const imgCanvasWrapperRef = useRef(null);
     const headerRef = useRef(null);
-
+    const viewport = useContext(ViewportContext);
     const {
       stickers,
       stickersRefs,
@@ -113,7 +116,7 @@ const Canvas = forwardRef(
       return () => {
         window.removeEventListener("click", handleClickOutside);
       };
-    }, [handleClickOutside]);
+    }, [handleClickOutside, viewport]);
 
     return (
       <div
@@ -174,6 +177,14 @@ const Canvas = forwardRef(
               />
               <StickerGenerator
                 img={mgl12}
+                handleGenerateSticker={handleGenerateSticker}
+              />
+              <StickerGenerator
+                img={mgls1}
+                handleGenerateSticker={handleGenerateSticker}
+              />
+              <StickerGenerator
+                img={mgls2}
                 handleGenerateSticker={handleGenerateSticker}
               />
             </GridContainer>

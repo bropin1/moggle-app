@@ -1,31 +1,31 @@
-import { useEffect, createContext } from "react";
-import "./App.css";
-import Playground from "./pages/playground";
-import { useState } from "react";
-import { ViewportProvider } from "./context/viewportCtxt";
+import React, { useState, useEffect } from "react";
 
-function App() {
+const ViewportContext = React.createContext();
+
+export const ViewportProvider = ({ children }) => {
+  const [viewport, setViewport] = useState(null);
+
   useEffect(() => {
     const setVhProperty = (e) => {
       document.documentElement.style.setProperty(
         "--vh",
         `${window.innerHeight * 0.01}px`
       );
+      setViewport(window.innerHeight);
     };
 
     setVhProperty(); // Set the initial value
     window.addEventListener("resize", setVhProperty);
+
     // Clean up the event listener when the component is unmounted
     return () => window.removeEventListener("resize", setVhProperty);
   }, []);
 
   return (
-    <ViewportProvider>
-      <div className="App">
-        <Playground />
-      </div>
-    </ViewportProvider>
+    <ViewportContext.Provider value={viewport}>
+      {children}
+    </ViewportContext.Provider>
   );
-}
+};
 
-export default App;
+export default ViewportContext;
